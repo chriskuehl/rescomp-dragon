@@ -35,15 +35,16 @@ def attempt_login(login_server, username, password):
 		print("Authentication failed with unexpected error:")
 		print("\t{}".format(ex))
 
-login_server = get_login_server()
+if __name__ == "__main__":
+	login_server = get_login_server()
 
-if login_server:
-	print("We appear to be using ResComp, proceeding with login.")
-	print("\tLogin server: {}".format(login_server))
+	if login_server:
+		print("We appear to be using ResComp, proceeding with login.")
+		print("\tLogin server: {}".format(login_server))
 
-	username = input("Enter your CalNet username: ")
-	password = getpass.getpass()
+		username = input("Enter your CalNet username: ")
+		password = getpass.getpass()
 
-	attempt_login(login_server, username, password)
-else:
-	print("No authentication is necessary.")
+		attempt_login(login_server, username, password)
+	else:
+		print("No authentication is necessary.")
