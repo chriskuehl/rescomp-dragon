@@ -32,7 +32,6 @@ if login_server:
 
 	try:
 		url = calnet_login.login(return_url, username, password)
-		print(url)
 		print("Authenticated successfully, welcome to the internet.")
 	except calnet_login.LoginError as ex:
 		print("Authentication failed with the following error:")
