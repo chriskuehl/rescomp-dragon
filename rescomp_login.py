@@ -20,15 +20,10 @@ def get_login_server():
 		if url.startswith(RESCOMP_PREFIX) and url.endswith(RESCOMP_SUFFIX):
 			return url
 
-login_server = get_login_server()
-
-if login_server:
-	print("We appear to be using ResComp, proceeding with login.")
-	print("\tLogin server: {}".format(login_server))
+def attempt_login(login_server, username, password):
+	"""Attempts to authenticate to ResComp with the given credentials."""
 
 	return_url = login_server + RESCOMP_LOGIN_PATH
-	username = input("Enter your CalNet username: ")
-	password = getpass.getpass()
 
 	try:
 		url = calnet_login.login(return_url, username, password)
@@ -39,5 +34,16 @@ if login_server:
 	except Exception as ex:
 		print("Authentication failed with unexpected error:")
 		print("\t{}".format(ex))
+
+login_server = get_login_server()
+
+if login_server:
+	print("We appear to be using ResComp, proceeding with login.")
+	print("\tLogin server: {}".format(login_server))
+
+	username = input("Enter your CalNet username: ")
+	password = getpass.getpass()
+
+	attempt_login(login_server, username, password)
 else:
 	print("No authentication is necessary.")
