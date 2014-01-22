@@ -7,8 +7,8 @@
     <access origin="*" />
     <content src="index.html" />
     <preference name="AllowInlineMediaPlayback" value="false" />
-    <preference name="BackupWebStorage" value="none" />
-    <preference name="DisallowOverscroll" value="true" />
+    <preference name="BackupWebStorage" value="cloud" />
+    <preference name="DisallowOverscroll" value="false" />
     <preference name="EnableViewportScale" value="false" />
     <preference name="KeyboardDisplayRequiresUserAction" value="true" />
     <preference name="MediaPlaybackRequiresUserAction" value="false" />
@@ -44,6 +44,8 @@
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="BackupWebStorage" value="none" />
     <icon src="icon.png" />
     <icon gap:density="ldpi" gap:platform="android" src="res/icon/android/icon-36-ldpi.png" />
     <icon gap:density="mdpi" gap:platform="android" src="res/icon/android/icon-48-mdpi.png" />
