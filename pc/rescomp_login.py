@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import calnet_login, calnet_credentials
-from urllib.request import urlopen
 
 REDIRECT_PREFIX = "https://net-auth-"
 REDIRECT_SUFFIX = ".housing.berkeley.edu/"

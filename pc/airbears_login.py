@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import calnet_login, calnet_credentials
-from urllib.request import urlopen
 
 REDIRECT_PREFIX = "http://wlan.berkeley.edu/login/"
 REDIRECT_SUFFIX = ""
