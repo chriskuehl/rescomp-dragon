@@ -13,12 +13,15 @@ def get_credentials():
 
 		if input("Would you like to store these credentials? [yN] ") == "y":
 			store_credentials(username, password)
-			print("Credentials saved to ~/.rescompd")
+			print("Credentials saved to {}".format(credentials_path_canon()))
 
 	return username, password
 
+def credentials_path_canon():
+	return "~/.calnet"
+
 def credentials_path():
-	return os.path.expanduser("~/.rescompd")
+	return os.path.expanduser(credentials_path_canon())
 
 def get_stored_credentials():
 	"""Returns stored username and password, or None for both"""
