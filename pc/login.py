@@ -16,6 +16,11 @@ def get_redirect_url():
 
 if __name__ == "__main__":
 	url = get_redirect_url()
+
+	# strip query strings
+	if "?" in url:
+		url = url[:url.index("?")]
+
 	found_mod = False
 
 	for mod in (airbears_login, rescomp_login):
