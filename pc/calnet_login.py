@@ -1,45 +1,40 @@
-from urllib.request import urlopen, Request, build_opener, HTTPCookieProcessor
-from urllib.parse import urlencode
-from http.cookiejar import CookieJar
 import re
+from urllib.parse import urlencode
+import requests
 
 CALNET_LOGIN_URL = "https://auth.berkeley.edu/cas/login"
 CALNET_HIDDENFIELD_REGEX = r'<input type="hidden" name="lt" value="(.*?)" />'
 
 def login(return_url, username, password):
+	session = requests.session()
 	url = get_login_url(return_url)
-	token = get_token(url)
+	token = get_token(session, url)
 
 	post_data = {
 		"username": username,
 		"password": password,
 		"_eventId": "submit",
+		"execution": "e1s1",
 		"lt": token
 	}
 
-	req = Request(url, urlencode(post_data).encode("utf-8"))
-	processor = HTTPCookieProcessor(CookieJar())
-	opener = build_opener(processor)
+	req = session.post(url, post_data)
+	new_url = req.url
 
-	with opener.open(req) as res:
-		new_url = res.geturl()
+	if new_url.lower() != return_url:
+	    raise LoginError("Redirected to unexpected URL: {}".format(new_url))
 
-		if new_url.lower().startswith(CALNET_LOGIN_URL):
-			raise LoginError("Redirected back to login form ({})".format(new_url))
-
-		return new_url
+	return new_url
 
 def get_login_url(return_url):
 	params = {"renew": True, "service": return_url}
 	return CALNET_LOGIN_URL + "?" + urlencode(params)
 
-def get_token(url):
+def get_token(session, url):
 	"""Fetches the value of the lt parameter used on the CalNet login
 	form."""
-
-	with urlopen(url) as res:
-		html = res.read().decode("utf-8")
-		return re.findall(CALNET_HIDDENFIELD_REGEX, html)[0]
+	html = session.get(url).text
+	return re.findall(CALNET_HIDDENFIELD_REGEX, html)[0]
 
 class LoginError(Exception):
 	pass

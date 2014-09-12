@@ -27,6 +27,6 @@ if __name__ == "__main__":
 		if url.startswith(mod.REDIRECT_PREFIX) and url.endswith(mod.REDIRECT_SUFFIX):
 			found_mod = True
 			mod.authenticate(url)
-		
+
 	if not found_mod:
 		print("No authentication is necessary.")

@@ -14,9 +14,11 @@ def attempt_login(username, password):
 	except calnet_login.LoginError as ex:
 		print("Authentication failed with the following error:")
 		print("\t{}".format(ex))
+		raise ex
 	except Exception as ex:
 		print("Authentication failed with unexpected error:")
 		print("\t{}".format(ex))
+		raise ex
 
 def authenticate(url):
 	print("We appear to be using AirBears, proceeding with login.")
