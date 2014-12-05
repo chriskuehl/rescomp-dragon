@@ -2,7 +2,7 @@ import re
 from urllib.parse import urlencode
 import requests
 
-CALNET_LOGIN_URL = "https://auth.berkeley.edu/cas/login"
+CALNET_LOGIN_URL = "https://cas-p1.calnet.berkeley.edu/cas/login"
 CALNET_HIDDENFIELD_REGEX = r'<input type="hidden" name="lt" value="(.*?)" />'
 
 def login(return_url, username, password):
@@ -22,7 +22,7 @@ def login(return_url, username, password):
 	new_url = req.url
 
 	if new_url.lower() != return_url:
-	    raise LoginError("Redirected to unexpected URL: {}".format(new_url))
+		raise LoginError("Redirected to unexpected URL <{}>, expected URL <{}>".format(new_url, return_url))
 
 	return new_url
 
